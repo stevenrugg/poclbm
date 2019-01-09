@@ -18,6 +18,7 @@ class Source(object):
 	def check_failback(self):
 		if self.switch.server_index != 0 and time() - self.last_failback > self.options.failback:
 			self.stop()
+			print "Server has stopped"
 			return True
 
 	def process_result_queue(self):
@@ -27,4 +28,5 @@ class Source(object):
 				if not self.switch.send(result, self.send_internal):
 					self.result_queue.put(result)
 					self.stop()
+					print "Server has Stopped"
 					break
